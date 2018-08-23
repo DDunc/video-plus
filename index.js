@@ -1,6 +1,6 @@
 import fullscreenNormalizer from './fullscreen-normalizer';
 
-export function updateElAttr({update, el, attr}) {
+function updateElAttr({update, el, attr}) {
 
   if (typeof update === "function") {
     el[attr] = update({el, attr})
@@ -11,30 +11,30 @@ export function updateElAttr({update, el, attr}) {
   return el
 }
 
-const fullscreenHandler = (e) => !fullscreenNormalizer.isFullScreen()
+const fullscreenHandler = (e) => !fullscreenNormalizer.isFullscreen()
   ? fullscreenNormalizer.requestFullscreen(e.target) :
   fullscreenNormalizer.exitFullscreen(e.target);
 
-export function addToggleFullscreen(el, action, fn = fullscreenHandler) {
+function addToggleFullscreen(el, action, fn = fullscreenHandler) {
   el.addEventListener(action, fn)
 }
 
-export function removeToggleFullscreen(el, action, fn = fullscreenHandler) {
+function removeToggleFullscreen(el, action, fn = fullscreenHandler) {
   el.removeEventListener(action, fn)
 }
 
-export function getWindowViewport({win = window}) {
+function getWindowViewport({win = window}) {
   return {
     width: win.innerWidth,
     height: win.innerHeight
   }
 }
 
-export function selectorOrEl (mysteryParam) {
+function selectorOrEl (mysteryParam) {
   return typeof mysteryParam === 'string' ? document.querySelector(mysteryParam) : mysteryParam
 }
 
-export function getElementPosition({el}) {
+function getElementPosition({el}) {
   // it's an exotic, we'd prefer to return normal object. Also possible through JSON.parse(JSON.stringify(el)), but this is more explicit/pathetically old-school
   const bounds = el.getBoundingClientRect();
 
@@ -51,21 +51,21 @@ export function getElementPosition({el}) {
   }
 }
 
-export function roundedViewPercentage({win = window, el}) {
+function roundedViewPercentage({win = window, el}) {
   const per = win / el;
   return (per >= 1 ? 1 : per) * 100;
 }
 
-export function roundedView ({num}) {
+function roundedView ({num}) {
   let checkedNum = num > 1 ? 1 : num;
   return Math.trunc(checkedNum * 100) < 0 ? 0 : Math.trunc(checkedNum * 100);
 }
 
-export function isPlaying({el}) {
+function isPlaying({el}) {
   return (!el.ended && !el.paused && el.currentTime > 0 && el.readyState > 2)
 }
 
-export function getCoordsAndEls(active, target) {
+function getCoordsAndEls(active, target) {
   let a = selectorOrEl(active);
   let t = selectorOrEl(target);
 
@@ -79,7 +79,7 @@ export function getCoordsAndEls(active, target) {
   }
 }
 
-export function isWithin({activeCoords, targetCoords, activeEl, targetEl}) {
+function isWithin({activeCoords, targetCoords, activeEl, targetEl}) {
   const a = activeCoords;
   const t = targetCoords;
 
@@ -90,7 +90,7 @@ export function isWithin({activeCoords, targetCoords, activeEl, targetEl}) {
 
 }
 
-export function inViewPercentage({win = window, el}) {
+function inViewPercentage({win = window, el}) {
   const winD = getWindowViewport({win});
   const elP = getElementPosition({el});
   let hSign = 0;
@@ -140,9 +140,12 @@ const removeListeners = ({events, el, ctx, fn = () => {}}) => {
 export default {
   isPlaying,
   inViewPercentage,
+  getElementPosition,
   update: updateElAttr,
   remaining: timeLeft,
   addToggleFullscreen,
+  isWithin,
+  isFullscreen: fullscreenNormalizer.isFullscreen,
   addListeners,
   removeListeners,
   removeToggleFullscreen

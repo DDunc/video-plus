@@ -50,9 +50,7 @@ function isFullscreen(el = document) {
 }
 
 export default {
-  // fuuuuu
   isFullscreen,
-  isFullScreen: isFullscreen,
   requestFullscreen: element => element[vendor[key.requestFullscreen]](),
   requestFullscreenFunction: element => element[vendor[key.requestFullscreen]],
   get exitFullscreen() { return document[vendor[key.exitFullscreen]].bind(document); },
