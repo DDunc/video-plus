@@ -1,0 +1,22 @@
+{
+  "name": "video-plus",
+  "version": "0.0.1",
+  "description": "utilities for the HTMLVideoElement",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DDunc/video-plus.git"
+  },
+  "keywords": [
+    "[\"HTMLVideoElement\"",
+    "\"video\"",
+    "\"utilities\"]"
+  ],
+  "author": "Duncan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DDunc/video-plus/issues"
+  },
+  "homepage": "https://github.com/DDunc/video-plus#readme"
+}
